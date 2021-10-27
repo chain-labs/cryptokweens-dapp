@@ -1,0 +1,13 @@
+@import url('/public/assets/css/bootstrap-reboot.min.css');
+@import url('/public/assets/css/bootstrap-grid.min.css');
+@import url('/public/assets/css/owl.carousel.min.css');
+@import url('/public/assets/css/magnific-popup.css');
+@import url('/public/assets/css/select2.min.css');
+@import url('/public/assets/css/main.css');
+
+a {
+	text-decoration: none;
+}
+a:visited {
+	color: inherit;
+}
