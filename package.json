@@ -7,10 +7,6 @@
   "dependencies": {
     "@ethereumjs/common": "^2.4.0",
     "@ethereumjs/tx": "^3.3.0",
-    "@rarible/action": "0.2.5",
-    "@rarible/protocol-api-client": "0.1.4",
-    "@rarible/protocol-ethereum-sdk": "0.1.4",
-    "@rarible/types": "0.1.2",
     "@styled-system/prop-types": "^5.1.5",
     "@svgr/webpack": "^5.5.0",
     "@types/styled-components": "^5.1.14",
