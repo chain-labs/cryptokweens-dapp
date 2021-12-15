@@ -2,7 +2,7 @@ import React from "react";
 import Box, { BoxProps } from "components/Box";
 
 export const fontSizes = {
-  h1: { mobS: "3.6rem", tabS: "4.8rem", deskM: "7.2rem" },
+  h1: { mobS: "3.6rem", tabS: "4.8rem", deskL: "5.6rem" },
   h2: { mobS: "3.2rem", tabS: "3.6rem", deskM: "4.8rem" },
   h3: { mobS: "2.4rem", tabS: "3.2rem", deskM: "3.6rem" },
   h4: { mobS: "2rem", tabS: "2.4rem", deskM: "3.2rem" },
