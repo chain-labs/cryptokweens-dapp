@@ -11,8 +11,7 @@ const useEthers = (): UseEthersResult => {
   const [ethers, setEthers] = useState<any>(null);
 
   const requestAccount = async () => {
-    if (process.browser)
-      await window?.ethereum?.request({ method: ETH_REQUEST_ACCOUNT });
+    if (process.browser) await window?.ethereum?.request({ method: ETH_REQUEST_ACCOUNT });
   };
 
   useEffect(() => {
