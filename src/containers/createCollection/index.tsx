@@ -1,13 +1,13 @@
-import React from 'react'
-import Box from 'src/components/Box'
-import Title from './components/Title'
+import React from "react";
+import Box from "src/components/Box";
+import Title from "./components/Title";
 
 const CreateCollectionComp = () => {
-    return (
-        <Box>
-            <Title/>
-        </Box>
-    )
-}
+  return (
+    <Box>
+      <Title />
+    </Box>
+  );
+};
 
-export default CreateCollectionComp
+export default CreateCollectionComp;
