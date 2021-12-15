@@ -1,13 +1,43 @@
-@import url('/public/assets/css/bootstrap-reboot.min.css');
-@import url('/public/assets/css/bootstrap-grid.min.css');
-@import url('/public/assets/css/owl.carousel.min.css');
-@import url('/public/assets/css/magnific-popup.css');
-@import url('/public/assets/css/select2.min.css');
-@import url('/public/assets/css/main.css');
+@import url("https://api.fontshare.com/css?f[]=satoshi@300,400,500,700,900&display=swap");
 
-a {
-	text-decoration: none;
+body,
+html {
+	padding: 0;
+	margin: 0;
+	font-size: 62.5%;
+	font-family: 'Satoshi', sans-serif;
+	overflow-x: hidden;
 }
+
+div {
+	font-size: 1.6rem;
+}
+
+* {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	margin: 0;
+	padding: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+a,
 a:visited {
+	text-decoration: none;
 	color: inherit;
+}
+
+svg {
+	z-index: 2;
 }

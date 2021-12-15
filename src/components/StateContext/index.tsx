@@ -1,60 +1,68 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect } from 'react';
-import Web3 from 'web3';
-import { createRaribleSdk } from '@rarible/protocol-ethereum-sdk';
-import { Web3Ethereum } from '@rarible/web3-ethereum';
+import React, { useEffect, useState } from "react";
+import useEthers from "src/ethereum/useEthers";
+import useListeners from "src/ethereum/useListeners";
+import useSigner from "src/ethereum/useSigner";
+import { ProviderProps, SignerProps } from "src/ethereum/types";
 
-export const StateContext = React.createContext({
-	provider: null,
-	accounts: [],
-	setProvider: null,
-	setAccounts: null,
-	sdk: null,
+export const StatesContext = React.createContext({
+  provider: null,
+  setProvider: null,
+  signer: null,
+  setSigner: null,
+  address: null,
 });
 
-const NETWORK = 'rinkeby';
+export interface StatesProviderProps {
+  children?: React.ReactNode;
+}
 
-const StateProvider = ({ children }) => {
-	const [provider, setProvider] = React.useState(null);
-	const [accounts, setAccounts] = React.useState([]);
-	const [sdk, setSdk] = React.useState(null);
+const StatesProvider = ({ children }: StatesProviderProps): JSX.Element => {
+  const [providerInstance, setProviderInstance, ethers] = useEthers();
+  const [signerInstance, setSignersInstance] = useSigner(providerInstance);
+  const [address, setAddress] = useState<string>("");
+  const [provider, setProvider] = useState<ProviderProps>(null);
+  const [signer, setSigner] = useState<SignerProps>(null);
 
-	useEffect(() => {
-		if (process.browser) {
-			// @ts-ignore
-			const { ethereum } = window;
-			if (ethereum && ethereum.isMetaMask) {
-				// @ts-ignore
-				const web3 = new Web3(ethereum);
-				setProvider(provider);
-				provider.eth.getAccounts().then((accounts) => {
-					console.log('accounts', accounts);
-					setAccounts(accounts);
-				});
+  useListeners(providerInstance, setProvider, setSigner);
 
-				const raribleSdk = createRaribleSdk(new Web3Ethereum({ web3 }), NETWORK);
-				setSdk(raribleSdk);
-				ethereum.on('accountsChanged', (accounts) => {
-					setAccounts(accounts);
-					console.log('accounts changed', accounts);
-				});
-			}
-		}
-	}, []);
+  const getAddress = async () => {
+    try {
+      const address = await signerInstance.getAddress();
+      setAddress(address);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	return (
-		<StateContext.Provider
-			value={{
-				provider: provider,
-				setProvider: setProvider,
-				accounts: accounts,
-				setAccounts: setAccounts,
-				sdk: sdk,
-			}}
-		>
-			{children}
-		</StateContext.Provider>
-	);
+  useEffect(() => {
+    if (providerInstance) {
+      setProvider(providerInstance);
+    }
+    if (signerInstance) {
+      setSigner(signerInstance);
+      getAddress();
+    }
+  }, [providerInstance, signerInstance]);
+
+  useEffect(() => {
+    if (signer) {
+      getAddress();
+    }
+  }, [signer]);
+
+  return (
+    <StatesContext.Provider
+      value={{
+        provider,
+        signer,
+        setProvider,
+        setSigner,
+        address,
+      }}
+    >
+      {children}
+    </StatesContext.Provider>
+  );
 };
 
-export default StateProvider;
+export default StatesProvider;
